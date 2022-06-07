@@ -1,8 +1,13 @@
 const sendMessage = require("../../sendMessage");
+const { NOTION_KEY, NOTION_DB_KEY, BOT_KEY } = process.env;
+const TG_API = `https://api.telegram.org/bot${BOT_KEY}/sendMessage`;
 
 exports.handler = async (event) => {
   const { message } = JSON.parse(event.body);
-  await sendMessage(message.chat_id, "I got the message");
+  await axios.post(TG_API, {
+    chat_id: JSON.parse(event.body).message.chat.id,
+    text: "I got your message again",
+  });
 
   return { statusCode: 200 };
 };
