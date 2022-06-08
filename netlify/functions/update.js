@@ -1,7 +1,8 @@
 const sendMessage = require("../../sendMessage");
 const messageParts = require("../../messageParts");
 const hashnode = require("../../hashnode");
-const { BOT_NAME } = require("../../helpers/consts");
+
+const BOT_NAME = "DitmarNotionNotes_bot";
 
 exports.handler = async (event) => {
   const { message } = JSON.parse(event.body);
