@@ -1,12 +1,12 @@
 const sendMessage = require("../../sendMessage");
 const messageParts = require("../../messageParts");
 const hashnode = require("../../hashnode");
+const notion = require("../../api/notion");
 
 const BOT_NAME = "DitmarNotionNotes_bot";
 
 exports.handler = async (event) => {
   const { message } = JSON.parse(event.body);
-  console.log(event);
   const { command, botName, extra } = messageParts(message.text);
 
   if (botName === BOT_NAME || botName === null) {
@@ -23,6 +23,11 @@ exports.handler = async (event) => {
           https://hashnode.com/featured
         `;
         await sendMessage(message.chat.id, reply);
+        break;
+      case "notion":
+        const notionThing = await notion.handler();
+        console.log("Notion data:", notionThing);
+        await sendMessage(message.chat.id, "notion asked");
         break;
       default:
         await sendMessage(message.chat.id, "I don't understand that command.");
