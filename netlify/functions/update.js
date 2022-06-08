@@ -1,19 +1,20 @@
 const sendMessage = require("../../sendMessage");
+const messageParts = require("../../messageParts");
 
 exports.handler = async (event) => {
   const { message } = JSON.parse(event.body);
   console.log(event);
-  // const commandMatch = message.text.match(/(?<=\/).*?(?=$| |@)/);
-  // const command = commandMatch ? commandMatch[0] : null;
-  // const botNameMatch = message.text.match(/(?<=@).*?(?=($| ))/);
-  // const botName = botNameMatch ? botNameMatch[0] : null;
-  // const extraMatch = message.text.match(/(?<=\s).*?(?=$)/);
-  // const extra = extraMatch ? extraMatch[0] : null;
+  const { command, botName, extra } = messageParts(message.text);
 
-  await sendMessage(message.chat.id, "I got your message!");
-
-  // if (botName === "DitmarNotionNotes_bot" || botName === null) {
-  // }
+  if (botName === "DitmarNotionNotes_bot" || botName === null) {
+    switch (command) {
+      case "echo":
+        await sendMessage(message.chat.id, extra || "ECHO!");
+        break;
+      default:
+        await sendMessage(message.chat.id, "I don't understand that command.");
+    }
+  }
 
   return { statusCode: 200 };
 };
