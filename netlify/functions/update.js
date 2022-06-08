@@ -2,6 +2,7 @@ const sendMessage = require("../../sendMessage");
 
 exports.handler = async (event) => {
   const { message } = JSON.parse(event.body);
+  console.log(event);
   // const commandMatch = message.text.match(/(?<=\/).*?(?=$| |@)/);
   // const command = commandMatch ? commandMatch[0] : null;
   // const botNameMatch = message.text.match(/(?<=@).*?(?=($| ))/);
