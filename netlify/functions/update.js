@@ -9,9 +9,10 @@ exports.handler = async (event) => {
   // const extraMatch = message.text.match(/(?<=\s).*?(?=$)/);
   // const extra = extraMatch ? extraMatch[0] : null;
 
-  if (botName === "DitmarNotionNotes_bot" || botName === null) {
-    await sendMessage(message.chat.id, "I got your message!");
-  }
+  await sendMessage(message.chat.id, "I got your message!");
+
+  // if (botName === "DitmarNotionNotes_bot" || botName === null) {
+  // }
 
   return { statusCode: 200 };
 };
