@@ -26,8 +26,11 @@ exports.handler = async (event) => {
         break;
       case "notion":
         const notionThing = await notion.handler();
-        console.log("Notion data:", JSON.parse(notionThing.body));
+        console.log("Notion data:", JSON.parse(notionThing.body).results[0]);
         // await sendMessage(message.chat.id, "notion asked");
+        break;
+      case "create":
+        await notion.createPage(extra);
         break;
       case "db":
         await sendMessage(message.chat.id, process.env.NOTION_DB_KEY);
