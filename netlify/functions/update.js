@@ -15,7 +15,8 @@ exports.handler = async (event) => {
           await notion.createPage(extra);
           await sendMessage(message.chat.id, "note added");
         } else {
-          await sendMessage("no message here");
+          await sendMessage(message.chat.id, "no message here");
+          console.log(message);
         }
         break;
       default:
