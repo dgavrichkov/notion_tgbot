@@ -24,7 +24,7 @@ exports.handler = async function () {
 };
 
 exports.createPage = async function (message) {
-  const title = message.substring(0, 14);
+  const title = message.substring(0, 25).concat("...");
   const response = await notion.pages.create({
     parent: {
       database_id: NOTION_DB_KEY,
