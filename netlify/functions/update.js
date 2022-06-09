@@ -11,8 +11,12 @@ exports.handler = async (event) => {
   if (botName === BOT_NAME || botName === null) {
     switch (command) {
       case "create":
-        await notion.createPage(extra);
-        await sendMessage(message.chat.id, "note added");
+        if (extra) {
+          await notion.createPage(extra);
+          await sendMessage(message.chat.id, "note added");
+        } else {
+          await sendMessage("no message here");
+        }
         break;
       default:
         await sendMessage(message.chat.id, "I don't understand that command.");
